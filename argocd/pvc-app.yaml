@@ -6,16 +6,19 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-username/your-repo.git   # 🔗 Your Git repo
-    targetRevision: main
-    path: pvc-chart
+    repoURL: https://github.com/abhinayrimilpurty/helm-pvc-demo.git
+    targetRevision: main          # branch
+    path: pvc-chart               # folder inside repo
     helm:
+      releaseName: pvc-demo       # name of Helm release in cluster
       valueFiles:
-        - values.yaml
+        - values.yaml             # override values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: my-app
+    namespace: my-app             # namespace where PVC will be created
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true                 # delete old resources if removed from git
+      selfHeal: true              # fix drift if someone changes resources manually
+    syncOptions:
+      - CreateNamespace=true      # ensures namespace "my-app" is created if missing

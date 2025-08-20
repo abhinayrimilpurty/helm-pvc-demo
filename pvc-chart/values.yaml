@@ -4,4 +4,4 @@ pvc:
   name: my-app-pvc
   accessMode: ReadWriteOnce
   size: 5Gi
-  storageClass: nfs01
+  storageClass: nfs-01
