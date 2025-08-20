@@ -1,0 +1,7 @@
+namespace: my-app
+
+pvc:
+  name: my-app-pvc
+  accessMode: ReadWriteOnce
+  size: 5Gi
+  storageClass: nfs01

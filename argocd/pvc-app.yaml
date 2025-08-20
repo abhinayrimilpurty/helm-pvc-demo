@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pvc-demo
+  namespace: argocd   # Argo CD control namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-username/your-repo.git   # 🔗 Your Git repo
+    targetRevision: main
+    path: pvc-chart
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
